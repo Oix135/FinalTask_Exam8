@@ -40,18 +40,24 @@ namespace FinalTask
             var groups = students.GroupBy(a => a.Group).ToList();
             foreach ( var group in groups)
             {
-                
-                using (var sw = File.CreateText(Path.Combine(pathStudents, group.Key + ".txt")))
+                try
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"\n{group.Key}\n");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    var groupStudents = students.Where(a => a.Group.Equals(group.Key)).ToList();
-                    foreach (var student in groupStudents)
+                    using (var sw = File.CreateText(Path.Combine(pathStudents, group.Key + ".txt")))
                     {
-                        sw.WriteLine($"{student.Name}, {student.DateOfBirth.ToString("d", CultureInfo.CurrentCulture)}");
-                        Console.WriteLine($"{student.Name}, {student.DateOfBirth.ToString("d", CultureInfo.CurrentCulture)}");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"\n{group.Key}\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        var groupStudents = students.Where(a => a.Group.Equals(group.Key)).ToList();
+                        foreach (var student in groupStudents)
+                        {
+                            sw.WriteLine($"{student.Name}, {student.DateOfBirth.ToString("d", CultureInfo.CurrentCulture)}");
+                            Console.WriteLine($"{student.Name}, {student.DateOfBirth.ToString("d", CultureInfo.CurrentCulture)}");
+                        }
                     }
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
 
             }
