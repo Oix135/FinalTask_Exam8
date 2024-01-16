@@ -55,13 +55,6 @@ namespace FinalTask
                 }
 
             }
-
-           
-
-
-
-            
-
         }
     }
 }
